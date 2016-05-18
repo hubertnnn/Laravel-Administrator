@@ -15,6 +15,7 @@ class BelongsToMany extends Relationship {
 		'column2' => '',
 		'multiple_values' => true,
 		'sort_field' => false,
+		'unlisted' => false,
 	);
 
 	/**

@@ -99,19 +99,26 @@
 				<!-- ko if: loadingOptions -->
 					<div class="loader"></div>
 				<!-- /ko -->
+				<!-- ko ifnot: $data['unlisted'] -->
+					<!-- ko if: autocomplete -->
+					<input type="hidden" data-bind="attr: {disabled: $root.freezeForm() || loadingOptions() || constraintLoading() || !editable,
+															id: field_id},
+										select2Remote: {field: field_name, type: 'edit', multiple: true, constraints: constraints, sort: sort_field},
+										value: $root[field_name]" />
+					<!-- /ko -->
 
-				<!-- ko if: autocomplete -->
-				<input type="hidden" data-bind="attr: {disabled: $root.freezeForm() || loadingOptions() || constraintLoading() || !editable,
-														id: field_id},
-									select2Remote: {field: field_name, type: 'edit', multiple: true, constraints: constraints, sort: sort_field},
-									value: $root[field_name]" />
+					<!-- ko ifnot: autocomplete -->
+					<input type="hidden" data-bind="attr: {disabled: $root.freezeForm() || loadingOptions() || constraintLoading() || !editable,
+															id: field_id},
+														select2: {data:{results: $root.listOptions[field_name]}, multiple: true, sort: sort_field},
+														value: $root[field_name]" />
+					<!-- /ko -->
 				<!-- /ko -->
-
-				<!-- ko ifnot: autocomplete -->
-				<input type="hidden" data-bind="attr: {disabled: $root.freezeForm() || loadingOptions() || constraintLoading() || !editable,
-														id: field_id},
-													select2: {data:{results: $root.listOptions[field_name]}, multiple: true, sort: sort_field},
-													value: $root[field_name]" />
+				<!-- ko if: $data['unlisted'] -->
+					<input type="hidden" data-bind="attr: {disabled: $root.freezeForm() || loadingOptions() || constraintLoading() || !editable,
+															id: field_id},
+														select2: {tags: $root.listOptions[field_name], multiple: true, sort: sort_field},
+														value: $root[field_name]" />
 				<!-- /ko -->
 			<!-- /ko -->
 
