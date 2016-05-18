@@ -48,6 +48,15 @@ class BelongsToMany extends Relationship {
 	 */
 	public function fillModel(&$model, $input)
 	{
+		//run the setter
+		$setter = $this->validator->arrayGet($this->suppliedOptions, 'set_value');
+		if (isset($setter) && is_callable($setter))
+		{
+			$input = $input ? explode(',', $input) : array();
+			$setter($model, $input);
+			return;
+		}
+
 		$input = $input ? explode(',', $input) : array();
 		$fieldName = $this->getOption('field_name');
 		$relationship = $model->{$fieldName}();
