@@ -59,6 +59,7 @@ abstract class Field {
 		'min_value' => '',
 		'max_value' => '',
 		'min_max' => false,
+		'set_value' => null,
 	);
 
 	/**
@@ -170,7 +171,16 @@ abstract class Field {
 	 */
 	public function fillModel(&$model, $input)
 	{
-		$model->{$this->getOption('field_name')} = is_null($input) ? '' : $input;
+		//run the setter
+		$setter = $this->validator->arrayGet($this->suppliedOptions, 'set_value');
+		if (isset($setter) && is_callable($setter))
+		{
+			$setter($model, $input);
+		}
+		else
+		{
+			$model->{$this->getOption('field_name')} = is_null($input) ? '' : $input;
+		}
 	}
 
 	/**
