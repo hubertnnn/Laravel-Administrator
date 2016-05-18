@@ -61,6 +61,7 @@ abstract class Field {
 		'min_max' => false,
 		'set_value' => null,
 		'get_value' => null,
+		'output' => null,
 	);
 
 	/**
@@ -129,6 +130,13 @@ abstract class Field {
 		if (isset($editable) && is_callable($editable))
 		{
 			$options['editable'] = $editable($this->config->getDataModel());
+		}
+
+		//run the output property's closure if supplied
+		$output = $this->validator->arrayGet($options, 'output');
+		if (isset($output) && is_callable($output))
+		{
+			$options['output'] = $output($this->config->getDataModel());
 		}
 
 		$this->suppliedOptions = $options;
