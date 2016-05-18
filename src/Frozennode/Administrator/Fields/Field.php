@@ -60,6 +60,7 @@ abstract class Field {
 		'max_value' => '',
 		'min_max' => false,
 		'set_value' => null,
+		'get_value' => null,
 	);
 
 	/**

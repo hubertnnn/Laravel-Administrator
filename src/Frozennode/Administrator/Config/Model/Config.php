@@ -287,6 +287,15 @@ class Config extends ConfigBase implements ConfigInterface {
 		$model->setAttribute('administrator_actions', $actionFactory->getActionsOptions(true));
 		$model->setAttribute('administrator_action_permissions', $actionFactory->getActionPermissions(true));
 
+		//Load data from custom getter
+		foreach($model->getAttribute('administrator_edit_fields') as $field)
+		{
+			if(isset($field['get_value']) && is_callable($field['get_value']))
+			{
+				$model->{$field['field_name']} = $field['get_value']($model);
+			}
+		}
+
 		return $model;
 	}
 
