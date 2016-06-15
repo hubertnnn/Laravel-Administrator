@@ -322,6 +322,7 @@
 							setTimeout(function()
 							{
 								History.pushState({modelName: self.modelName()}, null, route + self.modelName());
+								location.reload();
 							}, 200);
 						}
 						else
