@@ -118,7 +118,7 @@ View::composer(array('administrator::layouts.default'), function($view)
 
 		//remaining js assets
 		$view->js += array(
-			'knockout' => asset('packages/frozennode/administrator/js/knockout/knockout-3.4.0.js'),
+			'knockout' => asset('packages/frozennode/administrator/js/knockout/knockout-2.2.0.js'),
 			'knockout-mapping' => asset('packages/frozennode/administrator/js/knockout/knockout.mapping.js'),
 			'knockout-notification' => asset('packages/frozennode/administrator/js/knockout/KnockoutNotification.knockout.min.js'),
 			'knockout-update-data' => asset('packages/frozennode/administrator/js/knockout/knockout.updateData.js'),
