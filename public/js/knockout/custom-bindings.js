@@ -617,8 +617,8 @@
 			//otherwise pause for a moment and then set it
 			else
 			{
-				setTimeout(function()
-				{
+				//setTimeout(function()
+				//{
 					$element.html(value);
 
 					if ($element.data('blur'))
@@ -626,7 +626,7 @@
 					else
 						editor.setData(value);
 
-				}, 50);
+				//}, 50);
 			}
 		}
 	};
